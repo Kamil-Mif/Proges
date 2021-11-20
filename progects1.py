@@ -1,10 +1,16 @@
 import pgzrun
-#pygame.init()
+import pygame
+
+pygame.init()
 
 
 
-#pygame.mixer.music.load('sounds/m1.mp3')
-#pygame.mixer.music.play(-1)
+
+
+        
+            
+
+
 
 TITLE = "Лабиринт Духов" # Заголовок окна игры
 FPS = 60 # Количество кадров в секунд
@@ -18,6 +24,8 @@ cell = Actor ("bloks2")
 cell1 = Actor ("bloks1")
 cell2 = Actor ('bloks3')
 cell3 = Actor ('bloks4')
+cell4 = Actor ('bons')
+cell5 = Actor ('bloks5')
 size_w = 17 # Ширина поля в клетках
 size_h = 10 # Высота поля в клетках
 WIDTH = cell.width * size_w
@@ -28,11 +36,13 @@ count = 0
 
 mode = 'menu'
 
-
+if mode == 'menu':
+    pygame.mixer.music.load('sounds/m2.mp3')
+    pygame.mixer.music.play()
 
     
-map = [[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], 
-       [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 5, 0], 
+map = [[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0], 
+       [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0], 
        [0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0], 
        [0, 1, 0, 1, 1, 1, 0, 1, 0, 2, 1, 1, 0, 1, 0, 1, 0], 
        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0], 
@@ -61,8 +71,17 @@ def map_draw():
                 cell3.left = cell.width*j
                 cell3.top = cell.height*i
                 cell3.draw()
-        
-
+            
+            elif map[i][j] == 4:
+                cell4.left = cell.width*j
+                cell4.top = cell.height*i
+                cell4.draw()
+            
+            elif map[i][j] == 5:
+                cell5.left = cell.width*j
+                cell5.top = cell.height*i
+                cell5.draw()
+            
 def draw():
     global mode
     if mode == 'menu':
@@ -111,7 +130,10 @@ def update(dt):
         elif keyboard.z:
             mode = 'menu'
             
-
+        pygame.mixer.music.stop()
+        
+        pygame.mixer.music.load('sounds/m11.mp3')
+        pygame.mixer.music.play()
        
 def on_mouse_down(button, pos):
     global mode
